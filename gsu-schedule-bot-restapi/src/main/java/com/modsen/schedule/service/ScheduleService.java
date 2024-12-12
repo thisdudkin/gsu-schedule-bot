@@ -1,6 +1,7 @@
 package com.modsen.schedule.service;
 
 import com.modsen.schedule.domain.Schedule;
+import com.modsen.schedule.dto.ScheduleDto;
 import com.modsen.schedule.service.dao.ScheduleDao;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,13 @@ public class ScheduleService {
         this.scheduleDao = scheduleDao;
     }
 
-    public Set<Schedule> getScheduleForDate(LocalDate date) {
+    public Set<ScheduleDto> getScheduleForDate(LocalDate date) {
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         boolean isEvenWeek = date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) % 2 == 0;
-        Set<Schedule> schedules  = scheduleDao.getScheduleForDate(dayOfWeek, isEvenWeek);
+        Set<ScheduleDto> schedules  = scheduleDao.getScheduleDtoForDate(dayOfWeek, isEvenWeek);
 
-        List<Schedule> sortedSchedules = schedules.stream()
-                .sorted(Comparator.comparing(Schedule::time))
+        List<ScheduleDto> sortedSchedules = schedules.stream()
+                .sorted(Comparator.comparing(ScheduleDto::time))
                 .toList();
 
         return new LinkedHashSet<>(sortedSchedules);

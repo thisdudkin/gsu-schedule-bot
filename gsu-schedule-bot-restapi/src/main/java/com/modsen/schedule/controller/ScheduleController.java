@@ -1,6 +1,7 @@
 package com.modsen.schedule.controller;
 
 import com.modsen.schedule.domain.Schedule;
+import com.modsen.schedule.dto.ScheduleDto;
 import com.modsen.schedule.service.ScheduleService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -27,7 +27,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/{date}")
-    public ResponseEntity<Set<Schedule>> getScheduleByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+    public ResponseEntity<Set<ScheduleDto>> getScheduleByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return ResponseEntity.ok(scheduleService.getScheduleForDate(date));
     }
 
