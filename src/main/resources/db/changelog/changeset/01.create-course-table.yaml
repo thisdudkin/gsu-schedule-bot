@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-course-table
+      author: Alexander Dudkin
+      changes:
+        - createTable:
+            tableName: courses
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: number
+                  type: int
+                  constraints:
+                    nullable: false

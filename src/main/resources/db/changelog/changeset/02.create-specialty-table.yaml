@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-specialty-table
+      author: Alexander Dudkin
+      changes:
+        - createTable:
+            tableName: specialties
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: short_name
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false

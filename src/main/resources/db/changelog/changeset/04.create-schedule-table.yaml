@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-schedule-table
+      author: Alexander Dudkin
+      changes:
+        - createTable:
+            tableName: schedule
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: group_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: day_of_week
+                  type: VARCHAR(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time
+                  type: TIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: subject
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lecturer
+                  type: VARCHAR(100)
+              - column:
+                  name: room
+                  type: VARCHAR(20)
+              - column:
+                  name: week_type
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: schedule
+            baseColumnNames: group_id
+            referencedTableName: groups
+            referencedColumnNames: id
+            constraintName: fk_schedule_group
